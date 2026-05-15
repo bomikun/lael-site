@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lael — Baby Activity Tracker</title>
+  <meta name="description" content="Catat aktivitas harian bayi: susu, makan, tidur, popok, obat, dan tumbuh kembang. Gratis untuk orang tua Indonesia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #1a1a2e;
+      background: #fffbf5;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Hero */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #fff5eb 0%, #fce4ec 50%, #e8eaf6 100%);
+    }
+    .hero-icon {
+      width: 96px;
+      height: 96px;
+      background: linear-gradient(135deg, #ff8a80, #ea80fc);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 32px rgba(234, 128, 252, 0.3);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #d81b60, #7c4dff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero .tagline {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: #5c5c7a;
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+    .hero .subtitle {
+      font-size: 0.9rem;
+      color: #8888a0;
+      margin-bottom: 2.5rem;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      background: #1a1a2e;
+      color: #fff;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(26, 26, 46, 0.2);
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26, 26, 46, 0.3);
+    }
+    .cta-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* Features */
+    .features {
+      padding: 5rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .features h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .features .section-sub {
+      text-align: center;
+      color: #5c5c7a;
+      margin-bottom: 3rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.75rem;
+      border: 1px solid #f0eef5;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .feature-card p {
+      color: #5c5c7a;
+      font-size: 0.9rem;
+    }
+
+    /* Highlights */
+    .highlights {
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #f3e5f5, #e8eaf6);
+    }
+    .highlights-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .highlights h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .highlight-item {
+      padding: 1.5rem;
+    }
+    .highlight-num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #d81b60, #7c4dff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .highlight-label {
+      color: #5c5c7a;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #8888a0;
+      font-size: 0.85rem;
+    }
+    footer a {
+      color: #7c4dff;
+      font-weight: 500;
+    }
+    footer .links {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-icon">&#128118;</div>
+    <h1>Lael</h1>
+    <p class="tagline">Little Angel's Everyday Log</p>
+    <p class="subtitle">Catat setiap momen penting tumbuh kembang si kecil.<br>Susu, makan, tidur, popok, obat — semua dalam satu aplikasi.</p>
+    <a href="https://play.google.com/store/apps/details?id=com.bomikun.lael" class="cta-btn">
+      <svg viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+      Download di Play Store
+    </a>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2>Semua yang Kamu Butuhkan</h2>
+    <p class="section-sub">Pencatatan lengkap dalam satu aplikasi yang mudah digunakan</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fff3e0">&#127868;</div>
+        <h3>Minum Susu</h3>
+        <p>Catat ASI & formula, durasi menyusui, sisi payudara, jumlah ml. Timer built-in.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e8f5e9">&#127858;</div>
+        <h3>Makan</h3>
+        <p>Jenis makanan, porsi, durasi makan, foto makanan. Pantau pola makan si kecil.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e3f2fd">&#128164;</div>
+        <h3>Tidur</h3>
+        <p>Catat waktu tidur & bangun, durasi otomatis. Lihat pola tidur mingguan.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fce4ec">&#128118;</div>
+        <h3>Popok</h3>
+        <p>Pipis, pup, atau keduanya. Warna & tekstur pup untuk pantau kesehatan.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#f3e5f5">&#128138;</div>
+        <h3>Obat & Vitamin</h3>
+        <p>Jadwal harian, frekuensi, notifikasi pengingat. Tidak pernah terlewat lagi.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e0f2f1">&#9989;</div>
+        <h3>Aktivitas Harian</h3>
+        <p>Kegiatan, rohani, kebersihan. Checklist dengan streak harian dan template populer.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fff8e1">&#128200;</div>
+        <h3>Tumbuh Kembang</h3>
+        <p>Berat, tinggi, lingkar kepala. Grafik pertumbuhan visual.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e8eaf6">&#128203;</div>
+        <h3>Laporan & Export</h3>
+        <p>Laporan harian, tren 14 hari, ringkasan mingguan. Export CSV & PDF.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#efebe9">&#128106;</div>
+        <h3>Multi-Bayi</h3>
+        <p>Kelola lebih dari satu anak dalam satu akun. Beralih dengan satu ketukan.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="highlights">
+    <div class="highlights-inner">
+      <h2>Didesain untuk Orang Tua</h2>
+      <div class="highlight-grid">
+        <div class="highlight-item">
+          <div class="highlight-num">9+</div>
+          <div class="highlight-label">Modul pencatatan</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">14</div>
+          <div class="highlight-label">Hari tren & grafik</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">2</div>
+          <div class="highlight-label">Format export (CSV/PDF)</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">&#127769;</div>
+          <div class="highlight-label">Dark mode otomatis</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="links">
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="mailto:support@bomikun.com">Kontak</a>
+    </div>
+    <p>&copy; 2026 Bomikun. Made with love for Indonesian parents.</p>
+  </footer>
+
+</body>
+</html>
