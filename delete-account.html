@@ -54,6 +54,20 @@
     footer { padding: 32px 24px; border-top: 1px solid var(--outline-variant); margin-top: 48px; }
     footer .wrap { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--fg-muted); }
     footer .spc { flex: 1; }
+
+    @media (max-width: 640px) {
+      nav.top .wrap { padding: 12px 16px; gap: 12px; }
+      nav.top .logo span { font-size: 16px; }
+      nav.top a.link { font-size: 13px; }
+      main { padding: 32px 16px 48px; }
+      h1 { font-size: 28px; }
+      h2 { font-size: 18px; margin-top: 24px; }
+      p, li { font-size: 14px; }
+      .warning { padding: 12px 14px; margin: 18px 0; }
+      footer { padding: 24px 16px 40px; margin-top: 32px; }
+      footer .wrap { flex-wrap: wrap; gap: 10px 14px; font-size: 12px; }
+      footer .spc { display: none; }
+    }
   </style>
 </head>
 <body>
