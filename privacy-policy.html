@@ -4,62 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Lael</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/icon.png">
+  <link rel="stylesheet" href="/colors_and_type.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      color: #1a1a2e;
-      background: #fffbf5;
+    html, body {
+      background: var(--surface);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      font-weight: 500;
       line-height: 1.7;
     }
-    a { color: #7c4dff; }
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 3rem 2rem 4rem;
+    a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    a:hover { text-decoration: underline; }
+
+    nav.top {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(255,248,240,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--outline-variant);
     }
-    .back { display: inline-block; margin-bottom: 2rem; font-size: 0.9rem; }
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .updated {
-      color: #8888a0;
-      font-size: 0.85rem;
-      margin-bottom: 2.5rem;
-    }
-    h2 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-top: 2rem;
-      margin-bottom: 0.75rem;
-      color: #1a1a2e;
-    }
-    p, li {
-      color: #3a3a5c;
-      margin-bottom: 0.75rem;
-    }
-    ul {
-      padding-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    footer {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid #e8e8f0;
-      color: #8888a0;
-      font-size: 0.85rem;
-      text-align: center;
-    }
+    nav.top .wrap { display: flex; align-items: center; gap: 24px; padding: 16px 24px; max-width: 1120px; margin: 0 auto; }
+    nav.top .logo { display: flex; align-items: center; gap: 10px; }
+    nav.top .logo img { width: 32px; height: 32px; border-radius: 8px; }
+    nav.top .logo span { font-weight: 800; color: var(--primary); font-size: 18px; letter-spacing: -0.01em; }
+    nav.top .spacer { flex: 1; }
+    nav.top a.link { font-size: 14px; font-weight: 600; color: var(--fg-muted); }
+
+    main { max-width: 720px; margin: 0 auto; padding: 48px 24px 64px; }
+    .back { display: inline-block; margin-bottom: 24px; font-size: 14px; color: var(--fg-muted); }
+    .back:hover { color: var(--primary); }
+
+    h1 { font: var(--t-headline-lg); letter-spacing: -0.01em; margin-bottom: 8px; }
+    .updated { color: var(--fg-subtle); font-size: 13px; margin-bottom: 32px; }
+    h2 { font: var(--t-title-lg); margin-top: 32px; margin-bottom: 12px; }
+    p, li { color: var(--fg-muted); margin-bottom: 12px; font-size: 15px; }
+    strong { color: var(--fg); font-weight: 700; }
+    ul { padding-left: 24px; margin-bottom: 16px; }
+
+    footer { padding: 32px 24px; border-top: 1px solid var(--outline-variant); margin-top: 48px; }
+    footer .wrap { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--fg-muted); }
+    footer .spc { flex: 1; }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <a href="/" class="back">&larr; Kembali ke Lael</a>
+<nav class="top">
+  <div class="wrap">
+    <a href="/" class="logo">
+      <img src="/icon.png" alt="">
+      <span>Lael</span>
+    </a>
+    <div class="spacer"></div>
+    <a href="/" class="link">Beranda</a>
+    <a href="https://play.google.com/store/apps/details?id=com.bomikun.lael" class="link">Download</a>
+  </div>
+</nav>
+
+<main>
+  <a href="/" class="back">← Kembali ke Lael</a>
   <h1>Privacy Policy</h1>
   <p class="updated">Terakhir diperbarui: 15 Mei 2026</p>
 
@@ -91,6 +94,7 @@
   <p>Kami <strong>tidak membagikan</strong> data pribadi Anda kepada pihak ketiga, kecuali:</p>
   <ul>
     <li>Saat Anda secara sukarela mengekspor data (CSV/PDF) dan membagikannya sendiri.</li>
+    <li>Saat Anda mengundang pengasuh — pengasuh yang Anda undang dapat melihat & mencatat data bayi Anda hingga Anda mencabut akses.</li>
     <li>Jika diwajibkan oleh hukum yang berlaku.</li>
   </ul>
 
@@ -99,6 +103,7 @@
   <ul>
     <li><strong>Google Sign-In:</strong> untuk autentikasi. Tunduk pada <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.</li>
     <li><strong>Supabase:</strong> untuk penyimpanan data. Tunduk pada <a href="https://supabase.com/privacy" target="_blank">Supabase Privacy Policy</a>.</li>
+    <li><strong>Sentry:</strong> untuk laporan crash (anonymous, tanpa PII). Tunduk pada <a href="https://sentry.io/privacy/" target="_blank">Sentry Privacy Policy</a>.</li>
   </ul>
 
   <h2>6. Notifikasi</h2>
@@ -129,11 +134,22 @@
   <h2>11. Kontak</h2>
   <p>Jika Anda memiliki pertanyaan tentang kebijakan privasi ini, hubungi kami di:</p>
   <p><strong>Email:</strong> <a href="mailto:support@bomikun.com">support@bomikun.com</a></p>
+</main>
 
-  <footer>
-    <p>&copy; 2026 Bomikun. <a href="/">Lael — Baby Activity Tracker</a></p>
-  </footer>
-</div>
+<footer>
+  <div class="wrap">
+    <a href="/" style="display:flex; align-items:center; gap:8px;">
+      <img src="/icon.png" style="width:24px; height:24px; border-radius:6px;" alt="">
+      <span style="font-weight:800; color:var(--primary);">Lael</span>
+    </a>
+    <span class="spc"></span>
+    <a href="/privacy-policy">Privacy</a>
+    <a href="/terms-of-service">Terms</a>
+    <a href="/delete-account">Hapus Akun</a>
+    <a href="mailto:support@bomikun.com">Kontak</a>
+    <span>© 2026 Bomikun</span>
+  </div>
+</footer>
 
 </body>
 </html>
