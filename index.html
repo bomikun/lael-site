@@ -1,288 +1,419 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lael — Baby Activity Tracker</title>
-  <link rel="icon" type="image/png" href="/icon.png">
-  <meta name="description" content="Catat aktivitas harian bayi: susu, makan, tidur, popok, obat, dan tumbuh kembang. Gratis untuk orang tua Indonesia.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      color: #1a1a2e;
-      background: #fffbf5;
-      line-height: 1.6;
-    }
-    a { color: inherit; text-decoration: none; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lael — Baby Activity Tracker</title>
+<meta name="description" content="Catat aktivitas harian bayi: susu, makan, tidur, popok, obat, dan tumbuh kembang. Gratis untuk orang tua Indonesia.">
+<link rel="icon" type="image/png" href="/icon.png">
+<link rel="stylesheet" href="/colors_and_type.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--surface); color: var(--fg); font-family: var(--font-sans); font-weight: 500; line-height: 1.55; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-    /* Hero */
-    .hero {
-      min-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      background: linear-gradient(135deg, #fff5eb 0%, #fce4ec 50%, #e8eaf6 100%);
-    }
-    .hero-icon {
-      width: 96px;
-      height: 96px;
-      border-radius: 24px;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 8px 32px rgba(234, 128, 252, 0.3);
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #d81b60, #7c4dff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero .tagline {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: #5c5c7a;
-      max-width: 500px;
-      margin-bottom: 2rem;
-    }
-    .hero .subtitle {
-      font-size: 0.9rem;
-      color: #8888a0;
-      margin-bottom: 2.5rem;
-    }
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.875rem 2rem;
-      background: #1a1a2e;
-      color: #fff;
-      border-radius: 14px;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 16px rgba(26, 26, 46, 0.2);
-    }
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(26, 26, 46, 0.3);
-    }
-    .cta-btn svg { width: 20px; height: 20px; fill: currentColor; }
+  /* ─── nav ─── */
+  nav.top {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,248,240,0.85); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--outline-variant);
+  }
+  nav.top .wrap { display: flex; align-items: center; gap: 24px; padding: 16px 24px; }
+  nav.top .logo { display: flex; align-items: center; gap: 10px; }
+  nav.top .logo img { width: 32px; height: 32px; border-radius: 8px; }
+  nav.top .logo span { font-weight: 800; color: var(--primary); font-size: 18px; letter-spacing: -0.01em; }
+  nav.top .spacer { flex: 1; }
+  nav.top a.link { font-size: 14px; font-weight: 600; color: var(--fg-muted); }
+  nav.top a.cta {
+    background: var(--primary); color: #fff; padding: 10px 18px;
+    border-radius: 12px; font-size: 14px; font-weight: 700;
+    transition: transform 0.2s var(--ease-standard);
+  }
+  nav.top a.cta:hover { transform: translateY(-1px); }
 
-    /* Features */
-    .features {
-      padding: 5rem 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .features h2 {
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .features .section-sub {
-      text-align: center;
-      color: #5c5c7a;
-      margin-bottom: 3rem;
-    }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .feature-card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 1.75rem;
-      border: 1px solid #f0eef5;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-    }
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      margin-bottom: 1rem;
-    }
-    .feature-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .feature-card p {
-      color: #5c5c7a;
-      font-size: 0.9rem;
-    }
+  /* ─── hero ─── */
+  .hero {
+    padding: 72px 0 56px;
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 5.2vw, 4rem); line-height: 1.05; letter-spacing: -0.03em;
+    font-weight: 800; color: var(--fg);
+  }
+  .hero h1 .accent { color: var(--primary); }
+  .hero .tagline {
+    margin-top: 16px; font-size: 20px; color: var(--fg-muted); max-width: 480px;
+  }
+  .hero .ctas { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  .hero .cta-primary {
+    background: var(--primary); color: #fff; padding: 16px 28px;
+    border-radius: 14px; font-size: 16px; font-weight: 700;
+    box-shadow: 0 8px 24px rgba(232,160,191,0.32);
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: transform 0.2s;
+  }
+  .hero .cta-primary:hover { transform: translateY(-2px); }
+  .hero .cta-secondary {
+    color: var(--primary); padding: 16px 24px; font-size: 16px; font-weight: 600;
+    border: 1px solid var(--outline); border-radius: 14px;
+  }
+  .hero .trust { margin-top: 24px; font-size: 13px; color: var(--fg-subtle); display: flex; align-items: center; gap: 6px; }
+  .hero .trust b { color: var(--fg-muted); font-weight: 700; }
 
-    /* Highlights */
-    .highlights {
-      padding: 4rem 2rem;
-      background: linear-gradient(135deg, #f3e5f5, #e8eaf6);
-    }
-    .highlights-inner {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .highlights h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 2rem;
-    }
-    .highlight-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      text-align: center;
-    }
-    .highlight-item {
-      padding: 1.5rem;
-    }
-    .highlight-num {
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #d81b60, #7c4dff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .highlight-label {
-      color: #5c5c7a;
-      font-size: 0.9rem;
-      margin-top: 0.25rem;
-    }
+  /* hero device */
+  .hero-art { position: relative; min-height: 540px; }
+  .device {
+    position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    width: 280px; aspect-ratio: 9/19.5; background: var(--surface);
+    border-radius: 36px; border: 10px solid #1a1a2e;
+    box-shadow: 0 40px 80px rgba(45,30,40,0.18);
+    overflow: hidden;
+  }
+  .device .screen { width: 100%; height: 100%; padding: 28px 18px 18px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box; }
+  .device .baby-hd { display: flex; align-items: center; gap: 10px; }
+  .device .baby-hd .av { width: 36px; height: 36px; border-radius: 50%; background: var(--primary-container); color: var(--on-primary-container); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+  .device .baby-hd .nm { font-size: 13px; font-weight: 700; }
+  .device .baby-hd .ag { font-size: 10px; color: var(--fg-muted); }
+  .device .next {
+    background: linear-gradient(135deg, var(--primary-container) 0%, var(--secondary-container) 100%);
+    border-radius: 16px; padding: 12px; display: flex; align-items: center; gap: 10px;
+  }
+  .device .next .clk { width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; color: var(--m-milk); }
+  .device .next .nx { font-size: 9px; color: var(--on-primary-container); opacity: 0.85; }
+  .device .next .nv { font-size: 16px; font-weight: 800; color: var(--on-primary-container); letter-spacing: -0.01em; white-space: nowrap; }
+  .device .qa { display: flex; gap: 6px; }
+  .device .qa span { flex: 1; padding: 8px 0; text-align: center; border-radius: 10px; font-size: 9px; font-weight: 700; }
+  .device .qa span:nth-child(1) { background: var(--m-diaper-soft); color: var(--m-diaper); }
+  .device .qa span:nth-child(2) { background: var(--m-diaper-soft); color: var(--m-diaper); }
+  .device .qa span:nth-child(3) { background: var(--m-milk-soft); color: var(--m-milk); }
+  .device .qa span:nth-child(4) { background: var(--m-sleep-soft); color: var(--m-sleep); }
+  .device .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .device .gtile { background: var(--surface-low); border: 1px solid var(--outline-variant); border-radius: 12px; padding: 8px; height: 64px; display: flex; flex-direction: column; justify-content: space-between; }
+  .device .gtile .ico { width: 20px; height: 20px; border-radius: 5px; display: flex; align-items: center; justify-content: center; }
+  .device .gtile .ttl { font-size: 9px; font-weight: 600; }
+  .device .gtile .vl { font-size: 9px; font-weight: 700; }
+  .device .gtile.m-pill .ico { background: var(--m-medicine-soft); color: var(--m-medicine); }
+  .device .gtile.m-pill .vl { color: var(--m-medicine); }
+  .device .gtile.m-milk .ico { background: var(--m-milk-soft); color: var(--m-milk); }
+  .device .gtile.m-milk .vl { color: var(--m-milk); }
+  .device .gtile.m-meal .ico { background: var(--m-meal-soft); color: var(--m-meal); }
+  .device .gtile.m-meal .vl { color: var(--m-meal); }
+  .device .gtile.m-sleep .ico { background: var(--m-sleep-soft); color: var(--m-sleep); }
+  .device .gtile.m-sleep .vl { color: var(--m-sleep); }
 
-    /* Footer */
-    footer {
-      padding: 3rem 2rem;
-      text-align: center;
-      color: #8888a0;
-      font-size: 0.85rem;
-    }
-    footer a {
-      color: #7c4dff;
-      font-weight: 500;
-    }
-    footer .links {
-      margin-bottom: 1rem;
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-    }
-  </style>
+  /* floating sticker — mascot peek */
+  .float-mascot {
+    position: absolute; right: 0; top: 32px; width: 130px; height: 130px;
+    background: var(--surface-high); border-radius: 28px;
+    display: flex; align-items: center; justify-content: center;
+    transform: rotate(8deg);
+    box-shadow: 0 12px 32px rgba(232,160,191,0.24);
+  }
+  .float-mascot img { width: 110px; height: 110px; object-fit: contain; }
+  .float-tag {
+    position: absolute; left: -8px; top: 380px;
+    background: var(--surface); border: 1px solid var(--outline-variant);
+    border-radius: 14px; padding: 10px 14px;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 8px 24px rgba(45,30,40,0.06);
+  }
+  .float-tag .dot { width: 8px; height: 8px; border-radius: 4px; background: var(--m-diaper); }
+  .float-tag .t1 { font-size: 11px; font-weight: 700; }
+  .float-tag .t2 { font-size: 10px; color: var(--fg-muted); }
+
+  /* ─── feature grid ─── */
+  .section { padding: 64px 0; }
+  .section .eyebrow {
+    font-size: 13px; font-weight: 700; color: var(--primary); letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -0.02em;
+    max-width: 600px; line-height: 1.15;
+  }
+  .section .lede { color: var(--fg-muted); font-size: 17px; margin-top: 12px; max-width: 580px; }
+  .modgrid {
+    margin-top: 40px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  }
+  .modcard {
+    background: var(--surface-low); border: 1px solid var(--outline-variant);
+    border-radius: 20px; padding: 20px;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: transform 0.2s var(--ease-standard);
+  }
+  .modcard:hover { transform: translateY(-3px); border-color: var(--outline); }
+  .modcard .micon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 6px;
+  }
+  .modcard h3 { font-size: 15px; font-weight: 700; }
+  .modcard p { font-size: 13px; color: var(--fg-muted); }
+
+  /* ─── highlight band ─── */
+  .band {
+    background: linear-gradient(135deg, var(--primary-container) 0%, var(--secondary-container) 60%, var(--tertiary-container) 100%);
+    padding: 64px 0; margin: 24px 0 0;
+  }
+  .band .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .band .stat { text-align: center; }
+  .band .stat .num { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -0.02em; color: var(--on-primary-container); }
+  .band .stat .lbl { font-size: 13px; color: var(--on-primary-container); opacity: 0.78; margin-top: 4px; font-weight: 600; }
+
+  /* ─── why band ─── */
+  .why { padding: 72px 0; }
+  .whygrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 32px; }
+  .whycell { background: var(--surface-low); border: 1px solid var(--outline-variant); border-radius: 20px; padding: 24px; }
+  .whycell h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .whycell p { font-size: 14px; color: var(--fg-muted); }
+  .whycell .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; margin-bottom: 12px; }
+
+  /* ─── final cta ─── */
+  .final {
+    padding: 96px 24px; text-align: center;
+    background: var(--surface-high); margin-top: 0;
+  }
+  .final h2 { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -0.02em; }
+  .final .lede { color: var(--fg-muted); margin: 16px auto 28px; max-width: 480px; font-size: 17px; }
+
+  /* ─── footer ─── */
+  footer { padding: 32px 0; border-top: 1px solid var(--outline-variant); }
+  footer .wrap { display: flex; align-items: center; gap: 24px; font-size: 13px; color: var(--fg-muted); }
+  footer .spc { flex: 1; }
+  footer a { color: var(--primary); font-weight: 600; }
+
+  @media (max-width: 880px) {
+    .hero { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+    .hero-art { min-height: 480px; }
+    .modgrid { grid-template-columns: 1fr 1fr; }
+    .band .wrap { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .whygrid { grid-template-columns: 1fr; }
+    nav.top a.link { display: none; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- Hero -->
-  <section class="hero">
-    <img src="/icon.png" alt="Lael" class="hero-icon" style="object-fit:cover">
-    <h1>Lael</h1>
-    <p class="tagline">Little Angel's Everyday Log</p>
-    <p class="subtitle">Catat setiap momen penting tumbuh kembang si kecil.<br>Susu, makan, tidur, popok, obat — semua dalam satu aplikasi.</p>
-    <a href="https://play.google.com/store/apps/details?id=com.bomikun.lael" class="cta-btn">
-      <svg viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
-      Download di Play Store
+<nav class="top">
+  <div class="wrap">
+    <a href="/" class="logo">
+      <img src="/icon.png" alt="">
+      <span>Lael</span>
     </a>
-  </section>
+    <div class="spacer"></div>
+    <a href="#fitur" class="link">Fitur</a>
+    <a href="#kenapa" class="link">Kenapa Lael</a>
+    <a href="https://play.google.com/store/apps/details?id=com.bomikun.lael" class="cta">Download</a>
+  </div>
+</nav>
 
-  <!-- Features -->
-  <section class="features">
-    <h2>Semua yang Kamu Butuhkan</h2>
-    <p class="section-sub">Pencatatan lengkap dalam satu aplikasi yang mudah digunakan</p>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#fff3e0">&#127868;</div>
-        <h3>Minum Susu</h3>
-        <p>Catat ASI & formula, durasi menyusui, sisi payudara, jumlah ml. Timer built-in.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#e8f5e9">&#127858;</div>
-        <h3>Makan</h3>
-        <p>Jenis makanan, porsi, durasi makan, foto makanan. Pantau pola makan si kecil.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#e3f2fd">&#128164;</div>
-        <h3>Tidur</h3>
-        <p>Catat waktu tidur & bangun, durasi otomatis. Lihat pola tidur mingguan.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#fce4ec">&#128118;</div>
-        <h3>Popok</h3>
-        <p>Pipis, pup, atau keduanya. Warna & tekstur pup untuk pantau kesehatan.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#f3e5f5">&#128138;</div>
-        <h3>Obat & Vitamin</h3>
-        <p>Jadwal harian, frekuensi, notifikasi pengingat. Tidak pernah terlewat lagi.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#e0f2f1">&#9989;</div>
-        <h3>Aktivitas Harian</h3>
-        <p>Kegiatan, rohani, kebersihan. Checklist dengan streak harian dan template populer.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#fff8e1">&#128200;</div>
-        <h3>Tumbuh Kembang</h3>
-        <p>Berat, tinggi, lingkar kepala. Grafik pertumbuhan visual.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#e8eaf6">&#128203;</div>
-        <h3>Laporan & Export</h3>
-        <p>Laporan harian, tren 14 hari, ringkasan mingguan. Export CSV & PDF.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#efebe9">&#128106;</div>
-        <h3>Multi-Bayi</h3>
-        <p>Kelola lebih dari satu anak dalam satu akun. Beralih dengan satu ketukan.</p>
-      </div>
+<section class="hero wrap">
+  <div>
+    <h1>Catat setiap momen<br>tumbuh kembang <span class="accent">si kecil</span>.</h1>
+    <p class="tagline">Susu, makan, tidur, popok, obat — semua dalam satu aplikasi yang tenang dan hangat. Dibuat untuk orang tua Indonesia.</p>
+    <div class="ctas">
+      <a href="https://play.google.com/store/apps/details?id=com.bomikun.lael" class="cta-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+        Download di Play Store
+      </a>
+      <a href="#fitur" class="cta-secondary">Lihat fitur →</a>
     </div>
-  </section>
-
-  <!-- Highlights -->
-  <section class="highlights">
-    <div class="highlights-inner">
-      <h2>Didesain untuk Orang Tua</h2>
-      <div class="highlight-grid">
-        <div class="highlight-item">
-          <div class="highlight-num">9+</div>
-          <div class="highlight-label">Modul pencatatan</div>
+    <div class="trust">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      <b>Gratis</b> &middot; offline-first &middot; export CSV/PDF &middot; multi-bayi
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="device">
+      <div class="screen">
+        <div class="baby-hd">
+          <div class="av">P</div>
+          <div>
+            <div class="nm">Sore, Poco</div>
+            <div class="ag">8 bulan 28 hari</div>
+          </div>
         </div>
-        <div class="highlight-item">
-          <div class="highlight-num">14</div>
-          <div class="highlight-label">Hari tren & grafik</div>
+        <div class="next">
+          <div class="clk">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="nx">Susu berikutnya</div>
+            <div class="nv">1j 23m lagi</div>
+          </div>
         </div>
-        <div class="highlight-item">
-          <div class="highlight-num">2</div>
-          <div class="highlight-label">Format export (CSV/PDF)</div>
+        <div class="qa">
+          <span>Pipis</span>
+          <span>Pup</span>
+          <span>Susu</span>
+          <span>Tidur</span>
         </div>
-        <div class="highlight-item">
-          <div class="highlight-num">&#127769;</div>
-          <div class="highlight-label">Dark mode otomatis</div>
+        <div class="grid2">
+          <div class="gtile m-pill">
+            <div class="ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg></div>
+            <div><div class="ttl">Obat</div><div class="vl">3/5</div></div>
+          </div>
+          <div class="gtile m-milk">
+            <div class="ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2v2.789a4 4 0 0 1-.672 2.219l-.656.984A4 4 0 0 0 7 10.212V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9.789a4 4 0 0 0-.672-2.219l-.656-.984A4 4 0 0 1 15 4.788V2"/><path d="M8 2h8"/></svg></div>
+            <div><div class="ttl">Susu</div><div class="vl">4× · 1j 12m</div></div>
+          </div>
+          <div class="gtile m-meal">
+            <div class="ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/></svg></div>
+            <div><div class="ttl">Makan</div><div class="vl">2× makan</div></div>
+          </div>
+          <div class="gtile m-sleep">
+            <div class="ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div>
+            <div><div class="ttl">Tidur</div><div class="vl">2j 18m</div></div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="links">
-      <a href="/privacy-policy">Privacy Policy</a>
-      <a href="mailto:support@bomikun.com">Kontak</a>
+    <div class="float-mascot"><img src="/lael-head.png" alt=""></div>
+    <div class="float-tag">
+      <div class="dot"></div>
+      <div>
+        <div class="t1">Pipis dicatat</div>
+        <div class="t2">1 menit yang lalu</div>
+      </div>
     </div>
-    <p>&copy; 2026 Bomikun. Made with love for Indonesian parents.</p>
-  </footer>
+  </div>
+</section>
+
+<section class="section wrap" id="fitur">
+  <div class="eyebrow">Modul</div>
+  <h2>Sembilan modul, satu hari yang lengkap.</h2>
+  <p class="lede">Setiap kategori dapet warna sendiri jadi caregiver baru bisa scan cepat. Catat cuma butuh satu ketukan — di tengah ngantuk pun tetap gampang.</p>
+
+  <div class="modgrid">
+    <div class="modcard">
+      <div class="micon" style="background:var(--m-milk-soft); color:var(--m-milk);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2h8"/><path d="M9 2v2.789a4 4 0 0 1-.672 2.219l-.656.984A4 4 0 0 0 7 10.212V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9.789a4 4 0 0 0-.672-2.219l-.656-.984A4 4 0 0 1 15 4.788V2"/></svg>
+      </div>
+      <h3>Minum Susu</h3>
+      <p>ASI &amp; sufor, timer built-in, durasi, jumlah ml, sisi payudara.</p>
+    </div>
+    <div class="modcard">
+      <div class="micon" style="background:var(--m-meal-soft); color:var(--m-meal);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v22"/></svg>
+      </div>
+      <h3>Makan</h3>
+      <p>Sarapan/siang/snack/malam. Foto makanan opsional, durasi.</p>
+    </div>
+    <div class="modcard">
+      <div class="micon" style="background:var(--m-sleep-soft); color:var(--m-sleep);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </div>
+      <h3>Tidur</h3>
+      <p>Timer running, durasi otomatis. Pola tidur mingguan kelihatan.</p>
+    </div>
+    <div class="modcard">
+      <div class="micon" style="background:var(--m-diaper-soft); color:var(--m-diaper);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+      </div>
+      <h3>Popok &amp; Pup</h3>
+      <p>Pipis, pup, warna &amp; tekstur untuk pantau kesehatan.</p>
+    </div>
+    <div class="modcard">
+      <div class="micon" style="background:var(--m-medicine-soft); color:var(--m-medicine);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+      </div>
+      <h3>Obat &amp; Vitamin</h3>
+      <p>Jadwal harian, frekuensi, notifikasi pengingat &middot; streak.</p>
+    </div>
+    <div class="modcard">
+      <div class="micon" style="background:var(--m-activity-soft); color:var(--m-activity);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>
+      </div>
+      <h3>Aktivitas Harian</h3>
+      <p>Kegiatan &middot; rohani &middot; kebersihan. Checklist + streak motivasi.</p>
+    </div>
+    <div class="modcard">
+      <div class="micon" style="background:var(--m-growth-soft); color:var(--m-growth);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <h3>Tumbuh Kembang</h3>
+      <p>Berat, tinggi, lingkar kepala. Grafik 14 hari otomatis.</p>
+    </div>
+    <div class="modcard">
+      <div class="micon" style="background:var(--m-note-soft); color:var(--m-note);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="4" y="6" width="16" height="16" rx="2"/><path d="M14 14l4-4"/></svg>
+      </div>
+      <h3>Catatan Harian</h3>
+      <p>Free-text per tanggal. Untuk hal kecil yang penting diingat.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="stat">
+      <div class="num">9+</div>
+      <div class="lbl">Modul pencatatan</div>
+    </div>
+    <div class="stat">
+      <div class="num">14</div>
+      <div class="lbl">Hari tren &amp; grafik</div>
+    </div>
+    <div class="stat">
+      <div class="num">∞</div>
+      <div class="lbl">Multi-bayi &amp; pengasuh</div>
+    </div>
+    <div class="stat">
+      <div class="num">🌙</div>
+      <div class="lbl">Dark mode otomatis</div>
+    </div>
+  </div>
+</section>
+
+<section class="why wrap" id="kenapa">
+  <div class="eyebrow">Kenapa Lael</div>
+  <h2>Bayi udah bikin stress.<br>App-nya jangan ikut bikin stress.</h2>
+  <p class="lede">Dirancang dengan tiga prinsip: cepat di tangan satu, jelas di kondisi mengantuk, dan hangat — bukan klinis.</p>
+
+  <div class="whygrid">
+    <div class="whycell">
+      <span class="badge" style="background:var(--m-milk-soft); color:var(--m-milk);">Cepat</span>
+      <h4>Catat dalam satu ketukan</h4>
+      <p>Quick-action card di Beranda: Pipis · Pup · Susu · Tidur. Tidak perlu masuk modul untuk hal yang paling sering kejadian.</p>
+    </div>
+    <div class="whycell">
+      <span class="badge" style="background:var(--m-sleep-soft); color:var(--m-sleep);">Jelas</span>
+      <h4>Dark mode untuk feeding malam</h4>
+      <p>Otomatis aktif pukul 20:00–07:00. Surface dark navy yang tidak menyilaukan, dengan kontras WCAG AA terjaga.</p>
+    </div>
+    <div class="whycell">
+      <span class="badge" style="background:var(--m-diaper-soft); color:var(--m-diaper);">Hangat</span>
+      <h4>Berbagi dengan pengasuh</h4>
+      <p>Undang Ayah, kakek-nenek, atau Mbak pengasuh. Semua melihat data yang sama, dengan status pending/aktif yang jelas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <h2>Mulai catat hari ini.</h2>
+  <p class="lede">Gratis, tanpa iklan, data tetap kamu yang punya.</p>
+  <a href="https://play.google.com/store/apps/details?id=com.bomikun.lael" class="cta-primary" style="background:var(--primary); color:#fff; padding:16px 32px; border-radius:14px; font-size:16px; font-weight:700; box-shadow:0 8px 24px rgba(232,160,191,0.32); display:inline-flex; align-items:center; gap:10px;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+    Download di Play Store
+  </a>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="/" class="logo" style="display:flex; align-items:center; gap:8px;">
+      <img src="/icon.png" style="width:24px; height:24px; border-radius:6px;" alt="">
+      <span style="font-weight:800; color:var(--primary);">Lael</span>
+    </a>
+    <span class="spc"></span>
+    <a href="/privacy-policy">Privacy</a>
+    <a href="/terms-of-service">Terms</a>
+    <a href="/delete-account">Hapus Akun</a>
+    <a href="mailto:support@bomikun.com">Kontak</a>
+    <span>© 2026 Bomikun</span>
+  </div>
+</footer>
 
 </body>
 </html>

@@ -1,0 +1,283 @@
+/* ==========================================================================
+   Lael Design System — colors & type tokens
+   --------------------------------------------------------------------------
+   Source of truth: lib/core/theme/app_colors.dart + app_theme.dart
+   Refined for v2: slightly warmer surface, muted module accents, expanded
+   semantic scale, dark-mode parity.
+
+   Usage:
+     @import url("colors_and_type.css");
+     body { font-family: var(--font-sans); color: var(--fg); background: var(--surface); }
+
+   Dark mode auto-applies under [data-theme="dark"]. The Flutter app
+   activates dark theme automatically between 20:00–07:00 for night feeds.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+:root {
+  /* ─── Type families ──────────────────────────────────────────────────── */
+  --font-sans: "Nunito", "Roboto", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", system-ui, sans-serif;
+  --font-display: "Nunito", "Roboto", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Roboto Mono", Menlo, monospace;
+
+  /* ─── Type scale (matches Flutter TextTheme; rem-based) ──────────────── */
+  --t-display-lg: 700 3.5625rem/1.12 var(--font-display);   /* 57 */
+  --t-display-md: 700 2.8125rem/1.16 var(--font-display);   /* 45 */
+  --t-display-sm: 700 2.25rem/1.22 var(--font-display);     /* 36 */
+  --t-headline-lg: 700 2rem/1.25 var(--font-display);       /* 32 */
+  --t-headline-md: 700 1.75rem/1.29 var(--font-display);    /* 28 */
+  --t-headline-sm: 700 1.5rem/1.33 var(--font-display);     /* 24 */
+  --t-title-lg: 700 1.375rem/1.27 var(--font-sans);         /* 22 */
+  --t-title-md: 600 1rem/1.5 var(--font-sans);              /* 16 */
+  --t-title-sm: 600 0.875rem/1.43 var(--font-sans);         /* 14 */
+  --t-body-lg: 400 1rem/1.5 var(--font-sans);               /* 16 */
+  --t-body-md: 400 0.875rem/1.43 var(--font-sans);          /* 14 */
+  --t-body-sm: 400 0.75rem/1.33 var(--font-sans);           /* 12 */
+  --t-label-lg: 600 0.875rem/1.43 var(--font-sans);         /* 14 */
+  --t-label-md: 600 0.75rem/1.33 var(--font-sans);          /* 12 */
+  --t-label-sm: 500 0.6875rem/1.27 var(--font-sans);        /* 11 */
+
+  /* Letter spacing (used only on caps-y small labels) */
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.02em;
+
+  /* ─── Spacing (4dp base) ─────────────────────────────────────────────── */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+
+  /* ─── Radius ─────────────────────────────────────────────────────────── */
+  --r-xs: 6px;
+  --r-sm: 8px;     /* chips, icon tiles, tab pills */
+  --r-md: 12px;    /* inputs, list rows, primary buttons */
+  --r-lg: 16px;    /* default Card, FAB, date nav */
+  --r-xl: 20px;    /* large summary cards */
+  --r-2xl: 24px;   /* splash icon, hero blocks */
+  --r-pill: 999px; /* bottom-nav active indicator */
+
+  /* ─── Elevation (outline-first; no harsh drop shadows) ───────────────── */
+  --shadow-none: 0 0 0 0 transparent;
+  --shadow-card: 0 1px 0 rgba(45, 30, 40, 0.02);
+  --shadow-fab: 0 6px 16px rgba(232, 160, 191, 0.28),
+                0 2px 4px rgba(232, 160, 191, 0.16);
+  --shadow-modal: 0 24px 48px rgba(45, 30, 40, 0.18),
+                  0 4px 12px rgba(45, 30, 40, 0.08);
+  --shadow-snackbar: 0 8px 24px rgba(45, 30, 40, 0.16);
+
+  /* ─── Motion ─────────────────────────────────────────────────────────── */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-decel: cubic-bezier(0, 0, 0.2, 1);
+  --ease-accel: cubic-bezier(0.4, 0, 1, 1);
+  --dur-fast: 120ms;
+  --dur-med: 200ms;
+  --dur-slow: 320ms;
+
+  /* ============================================================
+     CORE PALETTE (light)
+     ============================================================ */
+
+  /* Primary — soft pink (rose) */
+  --primary: #e8a0bf;
+  --primary-on: #ffffff;
+  --primary-container: #ffd6ec;
+  --on-primary-container: #5a1a3a;
+  --primary-hover: #dc8eb2;
+  --primary-press: #c97a9f;
+
+  /* Secondary — lavender */
+  --secondary: #ba94d1;
+  --secondary-on: #ffffff;
+  --secondary-container: #edd9ff;
+  --on-secondary-container: #3a0060;
+
+  /* Tertiary — mint */
+  --tertiary: #7ec8b7;
+  --tertiary-on: #ffffff;
+  --tertiary-container: #b2ede3;
+  --on-tertiary-container: #003730;
+
+  /* Surface scale (warm cream stack) */
+  --surface: #fff8f0;
+  --surface-lowest: #ffffff;
+  --surface-low: #fff4fa;
+  --surface-container: #fff0f5;
+  --surface-high: #ffe8f3;
+  --surface-highest: #ffdeee;
+
+  /* Foreground */
+  --fg: #2d2d2d;       /* primary text */
+  --fg-muted: #4a4a4a; /* secondary text */
+  --fg-subtle: #8c7a85;/* helper / placeholder */
+  --on-surface: var(--fg);
+  --on-surface-variant: var(--fg-muted);
+
+  /* Outline */
+  --outline: #d4b8c8;
+  --outline-variant: #edd6e8;
+
+  /* Status */
+  --success: #5dae60;
+  --success-container: #d6efd8;
+  --warning: #d4a017;
+  --warning-container: #fff4d6;
+  --error: #e57373;
+  --error-container: #ffd9d6;
+
+  /* Past-day "time travel" overlay (v2 addition) */
+  --past-day-tint: rgba(212, 160, 23, 0.08);
+  --past-day-border: rgba(212, 160, 23, 0.32);
+
+  /* ============================================================
+     MODULE PALETTE (10 categories — strong + soft)
+     Soft variants are the strong color at 12–15% alpha; we expose
+     them as pre-mixed tokens for use against surface backgrounds.
+     ============================================================ */
+
+  /* Strong (icon, text, accent) */
+  --m-medicine: #e06b6b;   /* warm rose   */
+  --m-milk:     #5b9bd5;   /* calm blue   */
+  --m-meal:     #e8a14a;   /* honey       */
+  --m-diaper:   #4db88c;   /* fresh mint  */
+  --m-sleep:    #9575cd;   /* gentle purple */
+  --m-activity: #d4a017;   /* warm gold   */
+  --m-spiritual:#ab5eb0;   /* soft plum   */
+  --m-hygiene:  #26a6a6;   /* teal        */
+  --m-growth:   #5dae60;   /* leaf green  */
+  --m-note:     #c9a825;   /* mustard     */
+
+  /* Soft tile fills (pre-mixed onto warm cream) */
+  --m-medicine-soft:   #fbe2e2;
+  --m-milk-soft:       #e0ecf8;
+  --m-meal-soft:       #fbeada;
+  --m-diaper-soft:     #d8efe3;
+  --m-sleep-soft:      #e5deef;
+  --m-activity-soft:   #f6e8c4;
+  --m-spiritual-soft:  #ecdbed;
+  --m-hygiene-soft:    #d0eaea;
+  --m-growth-soft:     #dbecdc;
+  --m-note-soft:       #f5eccc;
+}
+
+/* ============================================================
+   DARK THEME (auto applies 20:00–07:00 in the Flutter app;
+   on the web set [data-theme="dark"] or prefers-color-scheme)
+   ============================================================ */
+
+[data-theme="dark"], .dark {
+  --primary: #ffd6ec;
+  --primary-on: #5a1a3a;
+  --primary-container: #7a2e55;
+  --on-primary-container: #ffd6ec;
+  --primary-hover: #ffc1de;
+  --primary-press: #ffabd0;
+
+  --secondary: #edd9ff;
+  --secondary-on: #3a0060;
+  --secondary-container: #5c3080;
+  --on-secondary-container: #edd9ff;
+
+  --tertiary: #b2ede3;
+  --tertiary-on: #003730;
+  --tertiary-container: #00574a;
+  --on-tertiary-container: #b2ede3;
+
+  --surface: #1a1a2e;
+  --surface-lowest: #0d0d1a;
+  --surface-low: #151525;
+  --surface-container: #1a1a2e;
+  --surface-high: #1f1f38;
+  --surface-highest: #252540;
+
+  --fg: #f5f5f5;
+  --fg-muted: #ccb8c4;
+  --fg-subtle: #8a7a85;
+  --on-surface: var(--fg);
+  --on-surface-variant: var(--fg-muted);
+
+  --outline: #8a7080;
+  --outline-variant: #4a3545;
+
+  --success: #8edc91;
+  --success-container: #1f4321;
+  --warning: #e8c050;
+  --warning-container: #3d3010;
+  --error: #ffb4ab;
+  --error-container: #690005;
+
+  --past-day-tint: rgba(212, 160, 23, 0.12);
+  --past-day-border: rgba(212, 160, 23, 0.40);
+
+  /* Module colors brighten slightly for dark surfaces */
+  --m-medicine: #ff8e8e;
+  --m-milk: #7ab4ea;
+  --m-meal: #f5b970;
+  --m-diaper: #6dd3a8;
+  --m-sleep: #b39ddb;
+  --m-activity: #e8c050;
+  --m-spiritual: #c47cc9;
+  --m-hygiene: #4dc6c6;
+  --m-growth: #8edc91;
+  --m-note: #e6c850;
+
+  --m-medicine-soft:   rgba(255, 142, 142, 0.18);
+  --m-milk-soft:       rgba(122, 180, 234, 0.18);
+  --m-meal-soft:       rgba(245, 185, 112, 0.18);
+  --m-diaper-soft:     rgba(109, 211, 168, 0.18);
+  --m-sleep-soft:      rgba(179, 157, 219, 0.18);
+  --m-activity-soft:   rgba(232, 192, 80, 0.18);
+  --m-spiritual-soft:  rgba(196, 124, 201, 0.18);
+  --m-hygiene-soft:    rgba(77, 198, 198, 0.18);
+  --m-growth-soft:     rgba(142, 220, 145, 0.18);
+  --m-note-soft:       rgba(230, 200, 80, 0.18);
+
+  --shadow-fab: 0 6px 16px rgba(0, 0, 0, 0.45),
+                0 2px 4px rgba(0, 0, 0, 0.30);
+  --shadow-modal: 0 24px 48px rgba(0, 0, 0, 0.50);
+  --shadow-snackbar: 0 8px 24px rgba(0, 0, 0, 0.40);
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT STYLES
+   Apply these directly to elements where convenient.
+   ============================================================ */
+
+html { font-family: var(--font-sans); color: var(--fg); }
+
+h1, .h1 { font: var(--t-headline-lg); letter-spacing: var(--tracking-tight); color: var(--fg); margin: 0; }
+h2, .h2 { font: var(--t-headline-md); letter-spacing: var(--tracking-tight); color: var(--fg); margin: 0; }
+h3, .h3 { font: var(--t-title-lg); color: var(--fg); margin: 0; }
+h4, .h4 { font: var(--t-title-md); color: var(--fg); margin: 0; }
+
+p, .p { font: var(--t-body-md); color: var(--fg); margin: 0; }
+.body-lg { font: var(--t-body-lg); color: var(--fg); }
+.body-sm { font: var(--t-body-sm); color: var(--fg-muted); }
+
+.label-lg { font: var(--t-label-lg); color: var(--fg); }
+.label-md { font: var(--t-label-md); color: var(--fg-muted); }
+.label-sm { font: var(--t-label-sm); color: var(--fg-muted); }
+
+.title-sm { font: var(--t-title-sm); color: var(--fg); }
+
+code, kbd, samp { font-family: var(--font-mono); font-size: 0.875em; }
+
+/* Module name helper — apply .module-{name} to wrap an icon tile */
+.module-medicine   { --m: var(--m-medicine);   --m-soft: var(--m-medicine-soft); }
+.module-milk       { --m: var(--m-milk);       --m-soft: var(--m-milk-soft); }
+.module-meal       { --m: var(--m-meal);       --m-soft: var(--m-meal-soft); }
+.module-diaper     { --m: var(--m-diaper);     --m-soft: var(--m-diaper-soft); }
+.module-sleep      { --m: var(--m-sleep);      --m-soft: var(--m-sleep-soft); }
+.module-activity   { --m: var(--m-activity);   --m-soft: var(--m-activity-soft); }
+.module-spiritual  { --m: var(--m-spiritual);  --m-soft: var(--m-spiritual-soft); }
+.module-hygiene    { --m: var(--m-hygiene);    --m-soft: var(--m-hygiene-soft); }
+.module-growth     { --m: var(--m-growth);     --m-soft: var(--m-growth-soft); }
+.module-note       { --m: var(--m-note);       --m-soft: var(--m-note-soft); }
